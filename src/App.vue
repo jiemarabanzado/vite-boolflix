@@ -1,15 +1,15 @@
 <script >
-  import PageTitle from './components/PageTitle.vue';
+  import AppHeader from './components/AppHeader.vue';
   export default{
     components:{
-      PageTitle
+      AppHeader
     }
   }
 </script>
 
 <template>
-  <PageTitle/>
+  <AppHeader/>
 </template>
 
-<style scoped>
+<style>
 </style>
