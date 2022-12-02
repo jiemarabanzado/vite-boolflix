@@ -36,7 +36,7 @@
         </div>
         <div class="Sub-category" v-if="this.store.filmAmbient=='home'">Serie TV</div>
         <div class="movies-grid" v-if="this.store.filmAmbient=='home'"> 
-            <AppCard  v-if="(this.store.filmAmbient=='home')" v-for="(movie,index) in this.store.series" :info="movie"/>
+            <AppCard @click="SeeMore(movie)"  v-if="(this.store.filmAmbient=='home')" v-for="(movie,index) in this.store.series" :info="movie"/>
         </div>
         <!--not home scenario-->
 
