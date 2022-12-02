@@ -5,5 +5,7 @@ export const store = reactive({
     series:[],
     activeContent:0,
     filmAmbient:'home',
-    searching:false
+    searching:false,
+    more:false,
+    toSee:[],
 });

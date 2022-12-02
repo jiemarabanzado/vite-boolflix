@@ -3,6 +3,7 @@
   import AppHeader from './components/AppHeader.vue';
   import AppCard from './components/AppCard.vue';
   import AppMain from './components/AppMain.vue';
+  import MoreInfo from './components/MoreInfo.vue';
   import SectionFirstMovie from './components/SectionFirstMovie.vue';
   import {store} from "./store"
   export default{
@@ -10,16 +11,19 @@
       AppHeader,
       AppCard,
       AppMain,
-      SectionFirstMovie
+      SectionFirstMovie,
+      MoreInfo
     },
     data(){
       return{
         store,
         movie:[],
+        unOrdered:[]
       }
     },
     created(){
       //getting movies
+
       axios
           .get("https://api.themoviedb.org/3/movie/popular",{
             params:{
@@ -36,12 +40,17 @@
                   language: 'it-IT',
                   append_to_response : 'videos'
                 }
-              }).then((response)=>{
-                this.store.movies.push(response.data);    
+              }).then((response)=>{ 
+                  console.log('ciao',response.data)
+                  this.store.movies.push(response.data)                      
               });
             }
-            console.log(this.store.movies)
+            console.log('temporary',temp[0].id)
+            console.log('unorder',this.unOrdered)
+            console.log('finale',this.store.movies)
           });   
+
+
           //getting series 
       axios
           .get("https://api.themoviedb.org/3/tv/popular",{
@@ -50,20 +59,26 @@
               language: 'it-IT',
             }
           }).then((response)=>{
-            this.store.series = response.data.results;
-            console.log(this.store.series)
-          });
-      axios
-          .get("https://api.themoviedb.org/3/tv/119051",{
-            params:{
-              api_key: '2da07cb365df98260a9f9cdf7219587f',
-              language: 'it-IT',
-              append_to_response : 'videos'
-            }
-          }).then((response)=>{
-            
-            console.log(response)
-          })  
+            console.log('popular',response.data.results)
+            //this.store.series = response.data.results;
+            //console.log(this.store.series)
+            const temp=response.data.results;
+            for (let index = 0; index < temp.length; index++) {
+              const id=temp[index].id;
+              console.log(id)
+              axios.get(`https://api.themoviedb.org/3/tv/${id}`,{         
+                params:{
+                  api_key: '2da07cb365df98260a9f9cdf7219587f',
+                  language: 'it-IT',
+                  append_to_response : 'videos'
+                }
+              }).then((response)=>{
+                this.store.series.push(response.data);    
+              });
+              
+            } 
+            console.log('final popular tv',this.store.series) 
+          }); 
     },
     methods :{
       getData(){
@@ -96,6 +111,7 @@
 </script>
 
 <template>
+  <MoreInfo/>
   <div class="background" v-if="(this.store.filmAmbient=='home' && this.store.searching==false)">
     <div class="img-gradient">
       <img :src="`https://image.tmdb.org/t/p/w1280${this.store.movies[this.store.activeContent].backdrop_path}`" alt="">

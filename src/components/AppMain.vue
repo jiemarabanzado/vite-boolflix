@@ -16,7 +16,10 @@
             }
         },
         methods:{
-            
+            SeeMore(temp){
+                this.store.more=true;
+                this.store.toSee=temp;
+            }
         }
     }
 </script>
@@ -29,7 +32,7 @@
         <!--home scenario-->
         <div class="Sub-category" v-if="this.store.filmAmbient=='home'">Film</div>
         <div class="movies-grid" v-if="this.store.filmAmbient=='home'"> 
-            <AppCard v-if="(this.store.filmAmbient=='home')" v-for="(movie,index) in this.store.movies" :info="movie"/>
+            <AppCard @click="SeeMore(movie)" v-if="(this.store.filmAmbient=='home')" v-for="(movie,index) in this.store.movies" :info="movie"/>
         </div>
         <div class="Sub-category" v-if="this.store.filmAmbient=='home'">Serie TV</div>
         <div class="movies-grid" v-if="this.store.filmAmbient=='home'"> 
