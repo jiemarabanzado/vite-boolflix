@@ -15,6 +15,17 @@
         store,
       }
     },
+    created(){
+      axios
+          .get("https://api.themoviedb.org/3/movie/popular",{
+            params:{
+              api_key: '2da07cb365df98260a9f9cdf7219587f',
+              language: 'it-IT',
+            }
+          }).then((response)=>{
+            this.store.movies = response.data.results;
+          }) 
+    },
     methods :{
       getData(){
         axios.get('https://api.themoviedb.org/3/search/movie',{
