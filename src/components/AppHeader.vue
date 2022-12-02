@@ -8,6 +8,18 @@
                store, 
                
             }
+        },
+        methods:{
+            ShowFilms(){
+                if(this.store.filmAmbient==false){
+                    this.store.filmAmbient=true;
+                }
+            },
+            ShowSeries(){
+                if(this.store.filmAmbient==true){
+                    this.store.filmAmbient=false;
+                }
+            }
         }
     }
 </script>
@@ -16,11 +28,11 @@
     <header>
         <div class="head-container">
             <div class="logo">
-                <img src="../assets/boolflix_logo.png" alt="">
+                <img onclick="window.location.reload()" src="../assets/boolflix_logo.png" alt="">
             </div>
             <div class="selection">
-                <div>Film</div>
-                <div>Serie Tv</div>
+                <div @click="ShowFilms" class="category" :class="(this.store.filmAmbient==true ? 'active':'')">Film</div>
+                <div @click="ShowSeries" class="category" :class="(this.store.filmAmbient!=true ? 'active':'')">Serie Tv</div>
             </div>
             <div>
                 <form action="" @submit.prevent>
@@ -65,9 +77,13 @@
         color: white;
         display: flex;
         flex-grow: 1;
-        div{
+        
+   }
+   .category{
             margin-right: 20px;
-            opacity: 0.7;
+            opacity: 0.5;
         }
+   .active{
+        opacity: 1;
    }
 </style>
