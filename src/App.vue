@@ -15,32 +15,34 @@
     data(){
       return{
         store,
-        movie:[]
+        movie:[],
       }
     },
     created(){
+      //getting movies
       axios
           .get("https://api.themoviedb.org/3/movie/popular",{
             params:{
               api_key: '2da07cb365df98260a9f9cdf7219587f',
               language: 'it-IT',
-              
             }
           }).then((response)=>{
-            this.store.movies = response.data.results;
+            const temp=response.data.results;
+            for (let index = 0; index < temp.length; index++) {
+              const id=temp[index].id;
+              axios.get(`https://api.themoviedb.org/3/movie/${id}`,{         
+                params:{
+                  api_key: '2da07cb365df98260a9f9cdf7219587f',
+                  language: 'it-IT',
+                  append_to_response : 'videos'
+                }
+              }).then((response)=>{
+                this.store.movies.push(response.data);    
+              });
+            }
             console.log(this.store.movies)
-          });
-      axios
-          .get("https://api.themoviedb.org/3/movie/436270",{
-            params:{
-              api_key: '2da07cb365df98260a9f9cdf7219587f',
-              language: 'it-IT',
-              append_to_response : 'videos'
-              
-            }
-          }).then((response)=>{
-            console.log(response)
-          });    
+          });   
+          //getting series 
       axios
           .get("https://api.themoviedb.org/3/tv/popular",{
             params:{
