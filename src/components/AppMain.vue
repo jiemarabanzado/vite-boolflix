@@ -41,5 +41,9 @@
         color:white;
         font-size: 2rem;
         margin-bottom: 10px;
+        position: sticky;
+        top:0;
+        z-index: 1;
+        background-color: rgba($color: #141414, $alpha: 0.6);
     }
 </style>
