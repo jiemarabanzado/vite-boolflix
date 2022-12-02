@@ -11,13 +11,18 @@
         },
         methods:{
             ShowFilms(){
-                if(this.store.filmAmbient==false){
-                    this.store.filmAmbient=true;
+                if(this.store.filmAmbient!='film'){
+                    this.store.filmAmbient='film'
                 }
             },
             ShowSeries(){
-                if(this.store.filmAmbient==true){
-                    this.store.filmAmbient=false;
+                if(this.store.filmAmbient!='serie'){
+                    this.store.filmAmbient='serie';
+                }
+            },
+            ShowHome(){
+                if(this.store.filmAmbient!='home'){
+                    this.store.filmAmbient='home';
                 }
             }
         }
@@ -31,8 +36,9 @@
                 <img onclick="window.location.reload()" src="../assets/boolflix_logo.png" alt="">
             </div>
             <div class="selection">
-                <div @click="ShowFilms" class="category" :class="(this.store.filmAmbient==true ? 'active':'')">Film</div>
-                <div @click="ShowSeries" class="category" :class="(this.store.filmAmbient!=true ? 'active':'')">Serie Tv</div>
+                <div onclick="window.location.reload()" class="category" :class="(this.store.filmAmbient=='home' ? 'active':'')">Home</div>
+                <div @click="ShowFilms" class="category" :class="(this.store.filmAmbient=='film' ? 'active':'')">Film</div>
+                <div @click="ShowSeries" class="category" :class="(this.store.filmAmbient=='serie' ? 'active':'')">Serie Tv</div>
             </div>
             <div>
                 <form action="" @submit.prevent>
@@ -67,7 +73,7 @@
     align-items: center;
    }
    .logo{
-        width: 150px;
+        width: 100px;
         margin-right: 30px;
         img{
             width: 100%;
@@ -82,8 +88,13 @@
    .category{
             margin-right: 20px;
             opacity: 0.5;
+            cursor: pointer;
         }
    .active{
         opacity: 1;
+        
+   }
+   header{
+    background-image: linear-gradient(#141414,transparent);
    }
 </style>

@@ -3,5 +3,7 @@ export const store = reactive({
     textToSearch:'',
     movies:[],
     series:[],
-    filmAmbient:true,
+    activeContent:0,
+    filmAmbient:'home',
+    searching:false
 });

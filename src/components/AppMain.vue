@@ -1,17 +1,22 @@
 <script>
     import AppCard from './AppCard.vue'
     import AppHeader from './AppHeader.vue'
+    import SectionFirstMovie from './SectionFirstMovie.vue'
     import {store} from "../store"
     export default{
         components:{
             AppCard,
-            AppHeader
+            AppHeader,
+            SectionFirstMovie
         },
         data(){
             return{
                 store,
                 
             }
+        },
+        methods:{
+            
         }
     }
 </script>
@@ -20,9 +25,21 @@
     <div class="container">
         <div class="current-window" v-if="(this.store.filmAmbient==true)">Film</div>
         <div class="current-window" v-if="(this.store.filmAmbient==false)">Serie Tv</div>
-        <div class="movies-grid">
-            <AppCard v-if="( this.store.movies.length>0 && this.store.filmAmbient==true)" v-for="movie in this.store.movies" :info="movie"/>
-            <AppCard v-if="( this.store.series.length>0 && this.store.filmAmbient!=true)" v-for="movie in this.store.series" :info="movie"/>
+        <SectionFirstMovie v-if="(this.store.searching==false)"/>
+        <!--home scenario-->
+        <div class="Sub-category" v-if="this.store.filmAmbient=='home'">Film</div>
+        <div class="movies-grid" v-if="this.store.filmAmbient=='home'"> 
+            <AppCard v-if="(this.store.filmAmbient=='home')" v-for="(movie,index) in this.store.movies" :info="movie"/>
+        </div>
+        <div class="Sub-category" v-if="this.store.filmAmbient=='home'">Serie TV</div>
+        <div class="movies-grid" v-if="this.store.filmAmbient=='home'"> 
+            <AppCard  v-if="(this.store.filmAmbient=='home')" v-for="(movie,index) in this.store.series" :info="movie"/>
+        </div>
+        <!--not home scenario-->
+
+        <div class="movies-grid" v-if="this.store.filmAmbient!='home'"> 
+            <AppCard  v-if="( this.store.movies.length>0 && this.store.filmAmbient=='film')" v-for="(movie,index) in this.store.movies" :info="movie"/>
+            <AppCard  v-if="( this.store.series.length>0 && this.store.filmAmbient=='serie')" v-for="(movie,index) in this.store.series" :info="movie"/>
         </div>
   </div>
 </template>
@@ -39,11 +56,15 @@
     }
     .current-window{
         color:white;
-        font-size: 2rem;
+        font-size: 1.7rem;
+        font-weight: 400;
         margin-bottom: 10px;
         position: sticky;
         top:0;
         z-index: 1;
-        background-color: rgba($color: #141414, $alpha: 0.6);
+    }
+    .Sub-category{
+        font-size: 1.7rem;
+        color: white;
     }
 </style>

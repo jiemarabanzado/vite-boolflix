@@ -11,23 +11,23 @@ import { objectToString } from '@vue/shared';
 <template>
     <div class="card">
         <div class="card-img">
-            <img v-if="(info.poster_path != null)" :src="`https://image.tmdb.org/t/p/w500${info.poster_path}`" :alt="info.title">
+            <img v-if="(info.poster_path != null)" :src="`https://image.tmdb.org/t/p/w1280${info.poster_path}`" :alt="info.title">
             <img v-if="(info.poster_path == null)" src="../assets/no0image.jpg" :alt="info.title">
         </div>
-        <div class="hidden-data">
+        <!--<div class="hidden-data">
             <div class="movie-title">
-                <span>Titolo:</span>{{info.title}}
+                <span>Titolo:</span>{{info.title}}{{info.name}}
             </div>
             <div class="language">
                 <span>Lingua-originale:</span>{{info.original_language}}
             </div>
             <div class="original-title">
-                <span>Titolo-originale:</span>{{info.original_title}}
+                <span>Titolo-originale:</span>{{info.original_title}}{{info.original_name}}
             </div>
             <div class="rating">
                 <span>Valutazione:</span>{{info.vote_average}}
             </div>
-        </div>
+        </div>-->
         
     </div>
 
