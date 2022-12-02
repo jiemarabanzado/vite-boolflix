@@ -24,7 +24,16 @@
             }
           }).then((response)=>{
             this.store.movies = response.data.results;
-          }) 
+          });
+      axios
+          .get("https://api.themoviedb.org/3/tv/popular",{
+            params:{
+              api_key: '2da07cb365df98260a9f9cdf7219587f',
+              language: 'it-IT',
+            }
+          }).then((response)=>{
+            this.store.series = response.data.results;
+          })  
     },
     methods :{
       getData(){
