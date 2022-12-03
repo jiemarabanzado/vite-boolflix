@@ -14,7 +14,7 @@ import { objectToString } from '@vue/shared';
             <img v-if="(info.poster_path != null)" :src="`https://image.tmdb.org/t/p/w1280${info.poster_path}`" :alt="info.title">
             <img v-if="(info.poster_path == null)" src="../assets/no0image.jpg" :alt="info.title">
         </div>
-        <!--<div class="hidden-data">
+        <div class="hidden-data">
             <div class="movie-title">
                 <span>Titolo:</span>{{info.title}}{{info.name}}
             </div>
@@ -27,7 +27,7 @@ import { objectToString } from '@vue/shared';
             <div class="rating">
                 <span>Valutazione:</span>{{info.vote_average}}
             </div>
-        </div>-->
+        </div>
         
     </div>
 

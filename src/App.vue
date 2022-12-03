@@ -82,6 +82,9 @@
     },
     methods :{
       getData(){
+        this.store.movies=[]
+        this.store.series=[]
+        this.store.toSee=[]
         this.store.searching=true;
         axios.get('https://api.themoviedb.org/3/search/movie',{
           params :{
@@ -90,7 +93,21 @@
             language: 'it-IT',
           }
         }).then((response)=>{
-          this.store.movies = response.data.results;
+          //this.store.movies = response.data.results;
+          const temp=response.data.results;
+            for (let index = 0; index < temp.length; index++) {
+              const id=temp[index].id;
+              axios.get(`https://api.themoviedb.org/3/movie/${id}`,{         
+                params:{
+                  api_key: '2da07cb365df98260a9f9cdf7219587f',
+                  language: 'it-IT',
+                  append_to_response : 'videos'
+                }
+              }).then((response)=>{ 
+                  console.log('ciao',response.data)
+                  this.store.movies.push(response.data)                      
+              });
+            }
         }).catch((err)=>{
           console.log('error');
         });
@@ -102,7 +119,26 @@
             language: 'it-IT',
           }
         }).then((resp)=>{
-          this.store.series= resp.data.results;
+          console.log('popular',resp.data.results)
+            //this.store.series = response.data.results;
+            //console.log(this.store.series)
+            const temp=resp.data.results;
+            for (let index = 0; index < temp.length; index++) {
+              const id=temp[index].id;
+              console.log(id)
+              axios.get(`https://api.themoviedb.org/3/tv/${id}`,{         
+                params:{
+                  api_key: '2da07cb365df98260a9f9cdf7219587f',
+                  language: 'it-IT',
+                  append_to_response : 'videos'
+                }
+              }).then((response)=>{
+                this.store.series.push(response.data);    
+              });
+              
+            } 
+            console.log('final popular tv',this.store.series)
+          //this.store.series= resp.data.results;
         })
       },
     }

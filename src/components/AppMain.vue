@@ -41,8 +41,8 @@
         <!--not home scenario-->
 
         <div class="movies-grid" v-if="this.store.filmAmbient!='home'"> 
-            <AppCard  v-if="( this.store.movies.length>0 && this.store.filmAmbient=='film')" v-for="(movie,index) in this.store.movies" :info="movie"/>
-            <AppCard  v-if="( this.store.series.length>0 && this.store.filmAmbient=='serie')" v-for="(movie,index) in this.store.series" :info="movie"/>
+            <AppCard @click="SeeMore(movie)"  v-if="( this.store.movies.length>0 && this.store.filmAmbient=='film')" v-for="(movie,index) in this.store.movies" :info="movie"/>
+            <AppCard  @click="SeeMore(movie)" v-if="( this.store.series.length>0 && this.store.filmAmbient=='serie')" v-for="(movie,index) in this.store.series" :info="movie"/>
         </div>
   </div>
 </template>
