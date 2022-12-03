@@ -18,6 +18,9 @@
 <template>
     <div class="pre-container" v-if="(this.store.more==true)">
         <div class="more">
+            <div class="video" v-if="(this.store.toSee.videos.results.lenght!=0)">
+                <iframe  width="560" height="315" :src="`https://www.youtube.com/embed/${this.store.toSee.videos.results[0].key}?controls=0&autoplay=1`"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
             <i @click="CloseMore" class="fa-solid fa-xmark"></i>
             <div class="MoreTitle">
                 {{this.store.toSee.title}}{{this.store.toSee.name}}
@@ -49,6 +52,9 @@
             margin: auto;
             position: relative;
             padding: 15px;
+            .video{
+                text-align: center;
+            }
             i{
                 color: white;
                 font-size: 2rem;
