@@ -1,15 +1,23 @@
 <script>
     import {store} from "../store"
+    import MoreInfo from "./MoreInfo.vue";
     export default {
         components:{
-
+            MoreInfo
         },
 
         data(){
             return{
                 store,
             }
-        }    
+        },
+        methods:{
+            ShowMore(temp){
+                
+                this.store.more=true;
+                this.store.toSee=temp;
+            }
+        }   
     }
     
 </script>
@@ -23,7 +31,7 @@
                 {{this.store.movies[this.store.activeContent].overview}}
             </div>
             <div>
-                <button>altre info </button>
+                <button @click="ShowMore(this.store.movies[0])">altre info </button>
             </div>
         </div>
     </div>
@@ -36,7 +44,7 @@
                 {{this.store.series[this.store.activeContent].overview}}
             </div>
             <div>
-                <button>altre info </button>
+                <button @click="ShowMore(this.store.series[0])">altre info </button>
             </div>
         </div>
     </div>
@@ -50,7 +58,7 @@
             padding: 15px;
             width: 500px;
             position: absolute;
-            background-color: rgba(20, 20, 20, 0.5);
+            /*background-color: rgba(20, 20, 20, 0.5);*/
             bottom: 10%;
             h2{
                 color:white;
@@ -68,6 +76,7 @@
                 background-color: lightgrey;
                 color: black;
                 border: none;
+                cursor: pointer;
             }
         }
     }
